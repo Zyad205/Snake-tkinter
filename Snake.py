@@ -214,7 +214,7 @@ class Game(ctk.CTk):
         if self.game_running:
             # Give the apple updated player body pos
             self.apple.player_body_pos = self.player.body_pos
-            collision_happened = self.apple.collision(self.player.body_pos)
+            collision_happened = self.apple.collision()
 
             if collision_happened:
                 self.player.score += 1
