@@ -162,7 +162,8 @@ class Game(ctk.CTk):
             player_hit_himself = self.player.body_collision()
             if player_hit_himself:
                 self.game_running = False
-
+                
+        if self.game_running:
             self.apple.player_body_pos = self.player.body_pos
 
             collision_happened = self.apple.collision(self.player.body_pos)
