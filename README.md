@@ -1,5 +1,6 @@
 # Snake
-![image](https://github.com/Zyad205/Snake-tkinter/assets/131090593/71d3076b-f6fb-4669-b662-eac54571f573)
+![image](https://github.com/Zyad205/Snake-tkinter/assets/131090593/1d42692a-7a18-4a85-bdb0-75d3e6ad46dd)
+
 
 ✔ Making snake using CustomTkinter.
 
