@@ -8,9 +8,9 @@ FOOD_COLOR = "#d11404"
 
 
 class Apple:
-    def __init__(self, app):
-        self.app = app
-        self.body = ctk.CTkLabel(self.app, bg_color=FOOD_COLOR, text="")
+    def __init__(self, game):
+        self.game = game
+        self.body = ctk.CTkLabel(self.game, bg_color=FOOD_COLOR, text="")
         self.randomize()
 
     def randomize(self):
@@ -18,7 +18,7 @@ class Apple:
         temp_pos = [randint(0, 29), randint(0, 29)]
         collision = False
 
-        for player_body_part in self.app.player.body_pos:
+        for player_body_part in self.game.player.body_pos:
             if player_body_part == temp_pos:
                 collision = True
                 break
@@ -34,14 +34,17 @@ class Apple:
     def collision(self):
         collision = False
 
-        for player_body_part in self.app.player.body_pos:
+        for player_body_part in self.game.player.body_pos:
             if player_body_part == self.position:
                 collision = True
                 break
         if collision:
-            print("hit")
+            self.game.player.score += 1
+            self.game.score_label.configure(text=f"Score: {self.game.player.score}")
+            
             self.randomize()
-            self.app.player.add_block = True
+            
+            self.game.player.add_block = True
 
  
 class Player:
@@ -55,6 +58,9 @@ class Player:
         self.add_block = False
         
         self.length = 2
+
+        self.score = 0
+
 
         self.body_pos = [[row, column], [row, column - 1]]
 
@@ -101,12 +107,19 @@ class Game(ctk.CTk):
 
         self.player = Player()
 
-        self.apple = Apple(app=self)
+        self.apple = Apple(self)
 
         self.labels = [ctk.CTkLabel(self, bg_color=SNAKE_HEAD_COLOR, text=""),
                        ctk.CTkLabel(self, bg_color=SNAKE_BODY_COLOR, text="")]
 
         self.last_key_pressed = "d"
+
+        self.score_label = ctk.CTkLabel(
+            self,
+            text=f"Score: {self.player.score}",
+            font=("Comic Sans MS Bold", 20))
+
+        self.score_label.place(relx=0.01, relheight=0.05)
 
         # Exit event
         self.bind("<Escape>", lambda event: exit())
