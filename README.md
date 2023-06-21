@@ -1,2 +1,2 @@
 # Snake
-✔ Making snake using CustomtTkinter.
+✔ Making snake using CustomTkinter.
