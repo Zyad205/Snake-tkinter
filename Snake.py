@@ -39,7 +39,7 @@ class Apple:
     def draw(self):
         """Draw {self.body}"""
         self.body.grid(row=self.position[0],
-                       column=self.position[1], sticky="nsew")
+                       column=self.position[1], sticky="nsew", padx=1, pady=1)
 
     def collision(self):
         """Returns {True} if player collied with the apple"""
@@ -235,7 +235,7 @@ class Game(ctk.CTk):
 
         for index, label in enumerate(self.labels):
             pos = self.player.body_pos[index]
-            label.grid(row=pos[0], column=pos[1], sticky="nsew")
+            label.grid(row=pos[0], column=pos[1], sticky="nsew", pady=1, padx=1)
 
     def lose(self):
         """Uses {.grid_forget()} on the {self.labels} and {self.apple.body}
