@@ -77,22 +77,26 @@ class Player:
 
         new_row = self.body_pos[0][0] + value_from_dict[0]
         new_column = self.body_pos[0][1] + value_from_dict[1]
-        if new_row < 0 or new_column < 0 or new_row == 30 or new_column == 30:
-            pass
-        else:
-            self.body_pos[0] = [new_row, new_column]
+        if new_row == -1:
+            new_row = 29
+        elif new_row == 30:
+            new_row = 0
+        elif new_column == -1:
+            new_column = 29
+        elif new_column == 30:
+            new_column = 0            
 
-            for index, body_part in enumerate(self.body_pos[1:]):
-                body_part_index = body_part.copy()
-                self.body_pos[index + 1] = self.position
-                self.position = body_part_index
-                
-            if self.add_block:
-                self.body_pos.append(self.position)
-                self.add_block = False
-                self.length += 1
-
-            self.position = self.body_pos[0]
+        self.body_pos[0] = [new_row, new_column]
+        for index, body_part in enumerate(self.body_pos[1:]):
+            body_part_index = body_part.copy()
+            self.body_pos[index + 1] = self.position
+            self.position = body_part_index
+            
+        if self.add_block:
+            self.body_pos.append(self.position)
+            self.add_block = False
+            self.length += 1
+        self.position = self.body_pos[0]
 
 
 class Game(ctk.CTk):
@@ -124,7 +128,7 @@ class Game(ctk.CTk):
             self,
             text=f"Score: {self.player.score}",
             font=("Comic Sans MS Bold", 20))
-
+        self.score_label.lower()
         self.score_label.place(relx=0.01, relheight=0.05)
 
         # Exit event
